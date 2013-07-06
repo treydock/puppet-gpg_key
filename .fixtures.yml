@@ -1,0 +1,5 @@
+fixtures:
+  repositories:
+    stdlib: git://github.com/puppetlabs/puppetlabs-stdlib.git
+  symlinks:
+    rpm_gpg_key: "#{source_dir}"
