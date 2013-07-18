@@ -4,6 +4,12 @@ The gpg_key module lets you manage GPG keys with Puppet.
 
 Currently the only provider is to import RPM GPG keys.
 
+## Compatibility
+
+| Puppet Versions   | < 2.6 | 2.6 | 2.7     | 3.x     |
+|:-----------------:|:-----:|:---:|:-------:|:-------:|
+| **gpg_key 0.0.x** | no    | no  | **yes** | **yes** |
+
 ## Support
 
 Tested using
