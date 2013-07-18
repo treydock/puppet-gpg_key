@@ -1,4 +1,4 @@
-# gpg_key
+# gpg_key [![Build Status](https://travis-ci.org/treydock/puppet-gpg_key.png)](https://travis-ci.org/treydock/puppet-gpg_key)
 
 The gpg_key module lets you manage GPG keys with Puppet.
 
