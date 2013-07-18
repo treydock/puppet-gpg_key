@@ -1,7 +1,7 @@
 Puppet::Type.newtype(:gpg_key) do
 
   desc <<-EOT
-
+    Manages GPG keys.
   EOT
 
   ensurable do

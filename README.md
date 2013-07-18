@@ -2,6 +2,8 @@
 
 The gpg_key module lets you manage GPG keys with Puppet.
 
+Currently the only provider is to import RPM GPG keys.
+
 ## Support
 
 Tested using
@@ -12,7 +14,18 @@ Tested using
 
 ## Usage
 
-### 
+### gpg_key
+
+Installs a GPG key at the given path.  This type autorequires the file resource in `path`
+
+    file { '/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6':
+      ensure  => present,
+      source  => 'file:///modules/epel/RPM-GPG-KEY-EPEL-6',
+    }
+
+    gpg_key { 'epel':
+      path  => '/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6',
+    }
 
 ## Reference
 
@@ -20,13 +33,21 @@ Types:
 
 * [gpg_key](#type-gpg_key)
 
-### Type: firewall
+### Type: gpg_key
 
 This type provides the capability to manage GPG keys within Puppet.
 
 ####`ensure`
 
+Indicates if the GPG key should be imported or removed.
+
+Can either be `present` or `absent`.  Defaults to `present`.
+
 ####`path`
+
+The path of the GPG key to import.
+
+This value must be an absolute filesystem path.
 
 ## Development
 
@@ -50,8 +71,3 @@ If you have Vagrant >= 1.1.0 you can also run system tests:
     bundle exec rake spec:system
     RSPEC_SET=centos-59-x64 bundle exec rake spec:system
     RSPEC_SET=fedora-18-x64 bundle exec rake spec:system
-
-
-## Further Information
-
-*
