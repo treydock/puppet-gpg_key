@@ -1,4 +1,4 @@
-name    'treydock-rpm_gpg_key'
+name    'treydock-gpg_key'
 version '0.0.1'
 source 'UNKNOWN'
 author 'treydock'

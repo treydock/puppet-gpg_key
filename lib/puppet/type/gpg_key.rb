@@ -11,9 +11,9 @@ Puppet::Type.newtype(:gpg_key) do
 
   newparam(:path) do
     desc 'The file Puppet will ensure is imported.'
-
+    
     isnamevar
-
+    
     validate do |value|
       unless Puppet::Util.absolute_path?(value)
         fail Puppet::Error, "File paths must be fully qualified, not '#{value}'"

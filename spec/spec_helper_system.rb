@@ -16,9 +16,7 @@ RSpec.configure do |c|
     puppet_install
     puppet_master_install
 
-    shell('puppet module install puppetlabs-stdlib --modulepath /etc/puppet/modules --force')
-    
     # Install rpm_gpg_key module
-    puppet_module_install(:source => proj_root, :module_name => 'rpm_gpg_key')
+    puppet_module_install(:source => proj_root, :module_name => 'gpg_key')
   end
 end

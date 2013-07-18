@@ -1,40 +1,56 @@
-# puppet-rpm_gpg_key
+# gpg_key
 
-UNKNOWN
+The gpg_key module lets you manage GPG keys with Puppet.
 
 ## Support
 
 Tested using
+
 * CentOS 5.9
 * CentOS 6.4
+* Fedora 18
 
 ## Usage
 
+### 
+
+## Reference
+
+Types:
+
+* [gpg_key](#type-gpg_key)
+
+### Type: firewall
+
+This type provides the capability to manage GPG keys within Puppet.
+
+####`ensure`
+
+####`path`
+
 ## Development
 
-### Dependencies
+### Testing
 
-* Ruby 1.8.7
-* Bundler
-* Vagrant >= 1.2.0
+Make sure you have:
 
-### Unit testing
+* rake
+* bundler
 
-1. To install dependencies run `bundle install`
-2. Run tests using `bundle exec rake ci`
+Install the necessary gems:
 
-### Vagrant system tests
+    bundle install
 
-1. Have Vagrant >= 1.2.0 installed
-2. Run tests using `bundle exec rake spec:system`
+Run the tests from root of the source code:
 
-For active development the `RSPEC_DESTROY=no` environment variable can be passed to keep the Vagrant VM from being destroyed after a test run.
+    bundle exec rake ci
 
-    RSPEC_DESTROY=no bundle exec rake spec:system
+If you have Vagrant >= 1.1.0 you can also run system tests:
 
-To test on CentOS 5.9 run the following:
-
+    bundle exec rake spec:system
     RSPEC_SET=centos-59-x64 bundle exec rake spec:system
+    RSPEC_SET=fedora-18-x64 bundle exec rake spec:system
+
 
 ## Further Information
 
