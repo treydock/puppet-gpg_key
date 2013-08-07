@@ -15,7 +15,7 @@ Puppet::Type.newtype(:gpg_key) do
     isnamevar
     
     validate do |value|
-      unless Puppet::Util.absolute_path?(value)
+      if File.expand_path(value) != value
         fail Puppet::Error, "File paths must be fully qualified, not '#{value}'"
       end
     end

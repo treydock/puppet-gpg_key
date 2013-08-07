@@ -11,3 +11,5 @@ task :ci => [
   :lint,
   :spec,
 ]
+
+PuppetLint.configuration.ignore_paths = ["vendor/**/*.pp", "spec/**/*.pp"]

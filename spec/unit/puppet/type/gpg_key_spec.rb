@@ -1,5 +1,4 @@
-require 'puppet'
-require 'tempfile'
+require 'spec_helper'
 
 describe Puppet::Type.type(:gpg_key) do
   let :gpg_key do
@@ -13,13 +12,15 @@ describe Puppet::Type.type(:gpg_key) do
     gpg_key[:path].should == '/tmp/gpg.key'
   end
 
-  it 'should accept posix filenames' do
+  it 'should accept fully qualified paths' do
     gpg_key[:path] = '/tmp/gpg.key'
     gpg_key[:path].should == '/tmp/gpg.key'
   end
 
-  it 'should not accept unqualified path' do
+  it 'should not accept unqualified paths' do
     expect { gpg_key[:path] = 'gpg.key' }.to raise_error(Puppet::Error, /File paths must be fully qualified/)
+    expect { gpg_key[:path] = './gpg.key' }.to raise_error(Puppet::Error, /File paths must be fully qualified/)
+    expect { gpg_key[:path] = '~/gpg.key' }.to raise_error(Puppet::Error, /File paths must be fully qualified/)
   end
 
   it 'should accept posix filename as name' do
