@@ -5,7 +5,6 @@ Puppet::Type.type(:gpg_key).provide(:rpm) do
   optional_commands :rpm => "rpm"
 
   if Facter.fact('operatingsystem').value =~ /Fedora/
-    Puppet.debug("FEDORA")
     optional_commands :gpg => "gpg2"
   else
     optional_commands :gpg => "gpg" 
@@ -14,8 +13,14 @@ Puppet::Type.type(:gpg_key).provide(:rpm) do
   defaultfor :osfamily => :redhat
   confine :osfamily => :redhat
 
+  def installed_gpg_pubkeys
+    command = ["rpm", "--query", "--queryformat", "'%{VERSION}\\n'", "gpg-pubkey"].join(" ")
+    results = execute(command, :combine => true).split("\n")
+    results
+  end
+
   def exists?
-    rpm(["--query", "--queryformat", '%{VERSION}\n', "gpg-pubkey"].compact) =~ /^#{keyid}$/
+    installed_gpg_pubkeys.include?(keyid)
   end
 
   def create

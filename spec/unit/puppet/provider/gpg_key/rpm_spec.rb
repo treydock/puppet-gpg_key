@@ -16,7 +16,7 @@ describe provider_class do
 
   let(:keyid) { '4bd6ec30' }
 
-  let(:gpg_pubkey_versions) do
+  let(:gpg_pubkey_list) do
     <<-RPM_OUTPUT
 c105b9de
 4bd6ec30
@@ -24,7 +24,41 @@ c105b9de
     RPM_OUTPUT
   end
 
+  let(:gpg_pubkey_array) do
+    [
+      'c105b9de',
+      '4bd6ec30',
+      '0608b895',
+    ]
+  end
+
   let(:gpg_throw_keyids) { 'pub  4096R/4BD6EC30 2010-07-10 Puppet Labs Release Key (Puppet Labs Release Key) <info@puppetlabs.com>' }
+
+  describe 'installed_gpg_pubkeys' do
+    it 'returns array of keys' do
+      @provider.stubs(:execute).with("rpm --query --queryformat '%{VERSION}\\n' gpg-pubkey", {:combine => true}).returns(gpg_pubkey_list)
+      @provider.installed_gpg_pubkeys.should == gpg_pubkey_array
+    end
+
+    it 'returns empty array' do
+      @provider.stubs(:execute).with("rpm --query --queryformat '%{VERSION}\\n' gpg-pubkey", {:combine => true}).returns("package gpg-pubkey is not installed")
+      @provider.installed_gpg_pubkeys.should == ['package gpg-pubkey is not installed']
+    end
+  end
+
+  describe 'exists?' do
+    it 'check if gpg key exists' do
+      @provider.stubs(:keyid).returns(keyid)
+      @provider.stubs(:installed_gpg_pubkeys).returns(gpg_pubkey_array)
+      @provider.exists?.should be_true
+    end
+
+    it 'check if gpg key does not exist' do
+      @provider.stubs(:keyid).returns('foo')
+      @provider.stubs(:installed_gpg_pubkeys).returns(gpg_pubkey_array)
+      @provider.exists?.should be_false
+    end
+  end
 
   describe 'create' do
     it 'imports a GPG key' do
@@ -42,20 +76,6 @@ c105b9de
       @provider.stubs(:keyid).returns(keyid)
       subject.expects(:rpm).with(["--erase", "gpg-pubkey-#{keyid}"])
       @provider.destroy
-    end
-  end
-
-  describe 'exists?' do
-    it 'check if gpg key exists' do
-      @provider.stubs(:keyid).returns(keyid)
-      subject.expects(:rpm).with(["--query", "--queryformat", '%{VERSION}\n', "gpg-pubkey"]).returns(gpg_pubkey_versions)
-      @provider.exists?.should be_true
-    end
-
-    it 'check if gpg key does not exist' do
-      @provider.stubs(:keyid).returns('foo')
-      subject.expects(:rpm).with(["--query", "--queryformat", '%{VERSION}\n', "gpg-pubkey"]).returns(gpg_pubkey_versions)
-      @provider.exists?.should be_false
     end
   end
 
