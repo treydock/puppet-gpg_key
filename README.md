@@ -71,10 +71,10 @@ Install the necessary gems:
 
 Run the tests from root of the source code:
 
-    bundle exec rake ci
+    bundle exec rake test
 
 If you have Vagrant >= 1.1.0 you can also run system tests:
 
-    bundle exec rake spec:system
-    RSPEC_SET=centos-59-x64 bundle exec rake spec:system
+    bundle exec rake acceptance
+    RSPEC_SET=centos-59-x64 bundle exec rake acceptance
     RSPEC_SET=fedora-18-x64 bundle exec rake spec:system

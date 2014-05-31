@@ -1,4 +1,4 @@
-require 'spec_helper_system'
+require 'spec_helper_acceptance'
 
 describe 'gpg_key tests:' do
   context "adding gpg key" do
@@ -13,19 +13,14 @@ describe 'gpg_key tests:' do
         }
       EOS
 
-      puppet_apply(pp) do |r|
-        r.exit_code.should_not == 1
-        r.refresh
-        r.exit_code.should be_zero
-      end
+      apply_manifest(pp, :catch_failures => true)
+      apply_manifest(pp, :catch_changes => true)
     end
   end
 
   context "when no gpg keys present" do
-    it "should remove all gpg-pubkeys" do
-      shell "rpm -e --allmatches gpg-pubkey-*" do |r|
-        r.exit_code.should be_zero
-      end
+    describe command "rpm -e --allmatches gpg-pubkey-*" do
+      it { should return_exit_status 0 }
     end
 
     it "should run successfully" do
@@ -39,11 +34,8 @@ describe 'gpg_key tests:' do
         }
       EOS
 
-      puppet_apply(pp) do |r|
-        r.exit_code.should_not == 1
-        r.refresh
-        r.exit_code.should be_zero
-      end
-    end    
+      apply_manifest(pp, :catch_failures => true)
+      apply_manifest(pp, :catch_changes => true)
+    end
   end
 end
