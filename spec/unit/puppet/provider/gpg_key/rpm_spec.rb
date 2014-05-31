@@ -58,6 +58,11 @@ c105b9de
       @provider.stubs(:installed_gpg_pubkeys).returns(gpg_pubkey_array)
       @provider.exists?.should be_false
     end
+
+    it 'should be false if keyid is nil' do
+      @provider.stubs(:keyid).returns(nil)
+      @provider.exists?.should be_false
+    end
   end
 
   describe 'create' do
@@ -81,8 +86,14 @@ c105b9de
 
   describe 'keyid' do
     it 'return keyid used by RPM' do
+      File.stubs(:exist?).with(@resource[:path]).returns(true)
       subject.expects(:gpg).with(["--quiet", "--throw-keyids", @resource[:path]]).returns(gpg_throw_keyids)
       @provider.keyid.should == keyid
+    end
+
+    it 'return nil if path does not exist' do
+      File.stubs(:exist?).with(@resource[:path]).returns(false)
+      @provider.keyid.should be_nil
     end
   end
 end

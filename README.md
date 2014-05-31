@@ -24,13 +24,14 @@ Tested using
 
 Installs a GPG key at the given path.  This type autorequires the file resource in `path`
 
-    file { '/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6':
+    file { 'RPM-GPG-KEY-foo':
       ensure  => present,
-      source  => 'file:///modules/epel/RPM-GPG-KEY-EPEL-6',
+      path    => '/etc/pki/rpm-gpg/RPM-GPG-KEY-foo',
+      source  => 'file:///modules/foo/RPM-GPG-KEY-foo',
     }
 
-    gpg_key { 'epel':
-      path  => '/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6',
+    gpg_key { 'foo':
+      path  => '/etc/pki/rpm-gpg/RPM-GPG-KEY-foo',
     }
 
 ## Reference

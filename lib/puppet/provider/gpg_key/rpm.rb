@@ -20,7 +20,11 @@ Puppet::Type.type(:gpg_key).provide(:rpm) do
   end
 
   def exists?
-    installed_gpg_pubkeys.include?(keyid)
+    if keyid
+      installed_gpg_pubkeys.include?(keyid)
+    else
+      false
+    end
   end
 
   def create
@@ -32,6 +36,10 @@ Puppet::Type.type(:gpg_key).provide(:rpm) do
   end
 
   def keyid
-    gpg(["--quiet", "--throw-keyids", @resource[:path]].compact)[11..18].downcase
+    if File.exist?(@resource[:path])
+      gpg(["--quiet", "--throw-keyids", @resource[:path]].compact)[11..18].downcase
+    else
+      nil
+    end
   end
 end
