@@ -50,18 +50,18 @@ c105b9de
     it 'check if gpg key exists' do
       @provider.stubs(:keyid).returns(keyid)
       @provider.stubs(:installed_gpg_pubkeys).returns(gpg_pubkey_array)
-      @provider.exists?.should be_true
+      @provider.exists?.should be true
     end
 
     it 'check if gpg key does not exist' do
       @provider.stubs(:keyid).returns('foo')
       @provider.stubs(:installed_gpg_pubkeys).returns(gpg_pubkey_array)
-      @provider.exists?.should be_false
+      @provider.exists?.should be false
     end
 
     it 'should be false if keyid is nil' do
       @provider.stubs(:keyid).returns(nil)
-      @provider.exists?.should be_false
+      @provider.exists?.should be false
     end
   end
 
