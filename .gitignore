@@ -16,5 +16,4 @@ Gemfile.lock
 .bundle/
 
 # Puppet module generated
-metadata.json
 pkg/
