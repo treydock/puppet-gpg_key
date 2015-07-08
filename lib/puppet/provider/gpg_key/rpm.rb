@@ -4,7 +4,7 @@ Puppet::Type.type(:gpg_key).provide(:rpm) do
 
   optional_commands :rpm => "rpm"
 
-  if Facter.fact('operatingsystem').value =~ /Fedora/
+  if Facter.value(:operatingsystem) =~ /Fedora/
     optional_commands :gpg => "gpg2"
   else
     optional_commands :gpg => "gpg" 
