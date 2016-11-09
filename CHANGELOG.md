@@ -4,6 +4,22 @@ Release notes for the treydock-gpg_key module.
 
 ------------------------------------------
 
+#### TBD Release 0.0.4
+
+This is a bugfix release to fix support for Facter 2.0 and switch module to using metadata.json
+
+This release also contains updated development Gem dependencies.
+
+Detailed Changes:
+
+* Fix support for Facter 2 and above
+* Switch module from Modulefile to metadata.json
+* Update development Gem dependencies
+* Move beaker and acceptance test gem dependencies into system_tests group
+* Update Travis-CI configuration
+
+------------------------------------------
+
 #### 2014-05-31 Release 0.0.3
 
 This is a bugfix release to fix running Puppet with --noop when the GPG key file specified using 'path' does not exist.

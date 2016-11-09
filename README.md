@@ -1,4 +1,7 @@
-# gpg_key [![Build Status](https://travis-ci.org/treydock/puppet-gpg_key.png)](https://travis-ci.org/treydock/puppet-gpg_key)
+# puppet-gpg_key
+
+[![Puppet Forge](http://img.shields.io/puppetforge/v/treydock/gpg_key.svg)](https://forge.puppetlabs.com/treydock/gpg_key)
+[![Build Status](https://travis-ci.org/treydock/puppet-gpg_key.svg?branch=master)](https://travis-ci.org/treydock/puppet-gpg_key)
 
 The gpg_key module lets you manage GPG keys with Puppet.
 
@@ -73,8 +76,8 @@ Run the tests from root of the source code:
 
     bundle exec rake test
 
-If you have Vagrant >= 1.1.0 you can also run system tests:
+If you have Vagrant you can also run system tests:
 
-    bundle exec rake acceptance
-    RSPEC_SET=centos-59-x64 bundle exec rake acceptance
-    RSPEC_SET=fedora-18-x64 bundle exec rake spec:system
+    bundle exec rake beaker
+    BEAKER_set=centos-59-x64 bundle exec rake beaker
+    BEAKER_set=fedora-18-x64 bundle exec rake beaker

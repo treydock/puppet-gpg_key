@@ -1,7 +1,11 @@
 source ENV['GEM_SOURCE'] || "https://rubygems.org"
 
 group :development, :test do
-  gem 'rake',                     :require => false
+  if RUBY_VERSION.start_with? '1.8'
+    gem 'rake', '< 11',           :require => false
+  else
+    gem 'rake',                   :require => false
+  end
   gem 'rspec', '~>3.1.0',         :require => false
   gem 'rspec-puppet', '~>2.x',    :require => false
   gem 'rspec-puppet-facts',       :require => false
