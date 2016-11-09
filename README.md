@@ -6,9 +6,9 @@ Currently the only provider is to import RPM GPG keys.
 
 ## Compatibility
 
-| Puppet Versions   | < 2.6 | 2.6 | 2.7     | 3.x     |
-|:-----------------:|:-----:|:---:|:-------:|:-------:|
-| **gpg_key 0.0.x** | no    | no  | **yes** | **yes** |
+| Puppet Versions   | < 2.6 | 2.6 | 2.7     | 3.x     | 4.x     |
+|:-----------------:|:-----:|:---:|:-------:|:-------:|:-------:|
+| **gpg_key 0.0.x** | no    | no  | **yes** | **yes** | **yes** |
 
 ## Support
 
