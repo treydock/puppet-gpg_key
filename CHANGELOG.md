@@ -4,7 +4,7 @@ Release notes for the treydock-gpg_key module.
 
 ------------------------------------------
 
-#### TBD Release 0.0.4
+#### 2016-11-10 Release 0.0.4
 
 This is a bugfix release to fix support for Facter 2.0 and switch module to using metadata.json
 
