@@ -11,7 +11,8 @@ Puppet::Type.type(:gpg_key).provide(:rpm) do
   end
 
   defaultfor :osfamily => :redhat
-  confine :osfamily => :redhat
+  defaultfor :osfamily => :suse
+  confine :osfamily => [:redhat, :suse]
 
   def installed_gpg_pubkeys
     command = ["rpm", "--query", "--queryformat", "'%{VERSION}\\n'", "gpg-pubkey"].join(" ")
