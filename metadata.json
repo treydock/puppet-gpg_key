@@ -1,6 +1,6 @@
 {
   "name": "treydock-gpg_key",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "author": "treydock",
   "summary": "Custom type and provider to manage GPG keys",
   "license": "Apache-2.0",
